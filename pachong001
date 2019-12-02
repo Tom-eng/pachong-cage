@@ -5,21 +5,21 @@ headers={
     'User-Agent':"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36"
 }
 
-def judgment_sex(class_name):
-    if class_name==['member_ico1']:
+def judgment_sex(class_name):     #用来判断房东性别   
+    if class_name==['member_ico1']:   #我们发现 class为member_ico1为女  member_ico 为男
         return '女'
     else:
         return '男'
 def get_links(url):
     wb_data=requests.get(url,headers=headers)
     soup=BeautifulSoup(wb_data.text,'lxml')
-    links=soup.select('#page_list > ul > li > a')
+    links=soup.select('#page_list > ul > li > a')   #获取不同页面链接
     for link in links:
         href=link.get('href')
         get_info(href)
 
 def get_info(url):
-    wb_data = requests.get(url, headers=headers)
+    wb_data = requests.get(url, headers=headers)   
     soup = BeautifulSoup(wb_data.text, 'lxml')
     titles=soup.select(' div.pho_info > h4 ')
     addresses=soup.select('span.pr5')
